@@ -64,13 +64,14 @@ const counter = createSlice({
     decremented: state => {
       state.value -= 1
     },
-    rnd : (state) => {
-      state.value *= Math.floor(Math.random() * 10)
+    rnd : (state, action) => {
+      state.value *= action.payload
     }
   }
 });
 
 export const {incremented, decremented, rnd} = counter.actions;
+export default counter.reducer;
 
 const store = configureStore({
   reducer: counter.reducer
@@ -91,7 +92,8 @@ document.getElementById('dec').addEventListener('click', () => {
 }); 
 
 document.getElementById('rnd').addEventListener('click', () => {
-  store.dispatch(rnd());
+  const val = Math.floor(Math.random() * 10);
+  store.dispatch(rnd(val));
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
