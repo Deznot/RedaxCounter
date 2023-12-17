@@ -18,9 +18,10 @@ subscribe(update);
 //   dispatch(creator(...args))
 // }
 
+// const {inc} = actions;
 // const incDispatch = bindActionCreator(inc, dispatch);
 
-const { inc, dec, rnd } = bindActionCreators({actions}, dispatch);
+const { inc, dec, rnd } = bindActionCreators(actions, dispatch);
 
 // const incDispatch = bindActionCreators(inc, dispatch);
 // const decDispatch = bindActionCreators(dec, dispatch);
@@ -30,7 +31,10 @@ document.getElementById('inc').addEventListener('click', inc);
 
 document.getElementById('dec').addEventListener('click', dec); 
 
-document.getElementById('rnd').addEventListener('click', rnd);
+document.getElementById('rnd').addEventListener('click', () => {
+  const value = Math.floor(Math.random() * 10);
+  rnd(value);
+});
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
